@@ -27,6 +27,10 @@ public class Leopard extends Predator {
 				moves[m] = new Move(this.square, HOR[getHorPosition()] + VERT[i]);
 				m++;
 			} else {
+				if (canEat(board[getHorPosition()][i])) {
+					moves[m] = new Move(this.square, HOR[getHorPosition()] + VERT[i]);
+					m++;
+				}
 				break;
 			}
 		}
@@ -35,6 +39,10 @@ public class Leopard extends Predator {
 				moves[m] = new Move(this.square, HOR[getHorPosition()] + VERT[i]);
 				m++;
 			} else {
+				if (canEat(board[getHorPosition()][i])) {
+					moves[m] = new Move(this.square, HOR[getHorPosition()] + VERT[i]);
+					m++;
+				}
 				break;
 			}
 		}
@@ -43,6 +51,10 @@ public class Leopard extends Predator {
 				moves[m] = new Move(this.square, HOR[i] + VERT[getVertPosition()]);
 				m++;
 			} else {
+				if (canEat(board[i][getVertPosition()])) {
+					moves[m] = new Move(this.square, HOR[i] + VERT[getVertPosition()]);
+					m++;
+				}
 				break;
 			}
 		}
@@ -51,6 +63,10 @@ public class Leopard extends Predator {
 				moves[m] = new Move(this.square, HOR[i] + VERT[getVertPosition()]);
 				m++;
 			} else {
+				if (canEat(board[i][getVertPosition()])) {
+					moves[m] = new Move(this.square, HOR[i] + VERT[getVertPosition()]);
+					m++;
+				}
 				break;
 			}
 		}
@@ -63,6 +79,10 @@ public class Leopard extends Predator {
 				m++;
 				j++;
 			} else {
+				if (j < 8 && canEat(board[i][j])) {
+					moves[m] = new Move(this.square, HOR[i] + VERT[j]);
+					m++;
+				}
 				break;
 			}
 		}
@@ -73,6 +93,10 @@ public class Leopard extends Predator {
 				m++;
 				j--;
 			} else {
+				if (j >= 0 && canEat(board[i][j])) {
+					moves[m] = new Move(this.square, HOR[i] + VERT[j]);
+					m++;
+				}
 				break;
 			}
 		}
@@ -83,6 +107,10 @@ public class Leopard extends Predator {
 				m++;
 				j++;
 			} else {
+				if (j < 8 && canEat(board[i][j])) {
+					moves[m] = new Move(this.square, HOR[i] + VERT[j]);
+					m++;
+				}
 				break;
 			}
 		}
@@ -93,6 +121,10 @@ public class Leopard extends Predator {
 				m++;
 				j--;
 			} else {
+				if (j >= 0 && canEat(board[i][j])) {
+					moves[m] = new Move(this.square, HOR[i] + VERT[j]);
+					m++;
+				}
 				break;
 			}
 		}

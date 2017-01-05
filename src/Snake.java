@@ -30,6 +30,10 @@ public class Snake extends Predator {
 					moves[m] = new Move(this.square, HOR[next] + VERT[j]);
 					m++;
 				} else {
+					if (canEat(board[next][j])) {
+						moves[m] = new Move(this.square, HOR[next] + VERT[j]);
+						m++;
+					}
 					break;
 				}
 				if (next != getHorPosition()) {
@@ -47,6 +51,10 @@ public class Snake extends Predator {
 					moves[m] = new Move(this.square, HOR[next] + VERT[j]);
 					m++;
 				} else {
+					if (canEat(board[next][j])) {
+						moves[m] = new Move(this.square, HOR[next] + VERT[j]);
+						m++;
+					}
 					break;
 				}
 				if (next != getHorPosition()) {
@@ -64,6 +72,10 @@ public class Snake extends Predator {
 					moves[m] = new Move(this.square, HOR[i] + VERT[next]);
 					m++;
 				} else {
+					if (canEat(board[i][next])) {
+						moves[m] = new Move(this.square, HOR[i] + VERT[next]);
+						m++;
+					}
 					break;
 				}
 				if (next != getVertPosition()) {
@@ -81,6 +93,10 @@ public class Snake extends Predator {
 					moves[m] = new Move(this.square, HOR[i] + VERT[next]);
 					m++;
 				} else {
+					if (canEat(board[i][next])) {
+						moves[m] = new Move(this.square, HOR[i] + VERT[next]);
+						m++;
+					}
 					break;
 				}
 				if (next != getVertPosition()) {

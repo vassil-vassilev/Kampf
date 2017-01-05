@@ -1,39 +1,66 @@
 /**
  * Die Klasse Move repraesentiert einen einzelnen Zug.
  *
- * Es gibt zwei Konstruktoren. Einer bekommt
- * Ausgangsfeld und Zielfeld uebergeben, der andere
- * bekommt nur den eingegebenen Zug in der Form
- * <Ausgangsfeld><Zielfeld> als String uebergeben,
- * also z. B. "a7c5" fuer den Zug von "a7" nach "c5".
+ * Es gibt zwei Konstruktoren. Einer bekommt Ausgangsfeld und Zielfeld
+ * uebergeben, der andere bekommt nur den eingegebenen Zug in der Form
+ * <Ausgangsfeld><Zielfeld> als String uebergeben, also z. B. "a7c5" fuer den
+ * Zug von "a7" nach "c5".
  */
 public class Move {
-	
-	private static final String[] I = {"1","2","3","4","5","6","7","8"};
-    private static final String[] J = {"a","b","c","d","e","f","g","h"};
-	
+
+    private static int vertToIndex(char c){return (c-'1');}
+    private static int horToIndex(char c){return (c-'a');}
+
 	private String from;
 	private String to;
 
-    public Move(String from, String to){
-    	this.from = from;
-    	this.to = to;
-    }
+	public Move(String from, String to) {
+		this.from = from;
+		this.to = to;
+	}
 
-    public Move(String move){
-        this.from = "" + move.charAt(0) + move.charAt(1);
-        this.to = "" + move.charAt(2) + move.charAt(3);
-    }
+	public Move(String move) {
+		this.from = "" + move.charAt(0) + move.charAt(1);
+		this.to = "" + move.charAt(2) + move.charAt(3);
+	}
 
-    @Override
-    public String toString(){
-        // Rueckgabe exakt in der Form <Ausgangsfeld><Zielfeld> als String,
-        // also z. B. "b2b3" fuer den Zug eines Tiers von "b2" nach "b3".
-    	return from + to;
-    }
+	@Override
+	public String toString() {
+		// Rueckgabe exakt in der Form <Ausgangsfeld><Zielfeld> als String,
+		// also z. B. "b2b3" fuer den Zug eines Tiers von "b2" nach "b3".
+		return from + to;
+	}
 
-    public boolean equals(Object other) {
-        return this.toString().equals(other);
-    }
+	public boolean equals(Object other) {
+		return this.toString().equals(other);
+	}
 
+	public int getFromHor() {
+		return horToIndex(from.charAt(0));
+	}
+
+	public int getFromVert() {
+		return vertToIndex(from.charAt(1));
+	}
+	
+	public int getToHor() {
+		return horToIndex(to.charAt(0));
+	}
+
+	public int getToVert() {
+		return vertToIndex(to.charAt(1));
+	}
+	public String getFrom() {
+		return from;
+	}
+	public void setFrom(String from) {
+		this.from = from;
+	}
+	public String getTo() {
+		return to;
+	}
+	public void setTo(String to) {
+		this.to = to;
+	}
+	
 }

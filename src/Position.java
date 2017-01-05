@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * Die Klasse Position repraesentiert eine Spielsituation.
  *
@@ -71,7 +73,7 @@ public class Position {
 		myAnimals[30] = new Rabbit(false, "g7", this);
 		myAnimals[31] = new Penguin(false, "h7", this);
 
-		myAnimals[32] = new Snake(false, "d4", this);
+		myAnimals[32] = new Leopard(false, "d4", this);
 	}
 
 	/**
@@ -89,18 +91,38 @@ public class Position {
 	 *
 	 */
 	public void applyMoves(Move[] move) {
+		for (int i = 0; i < move.length; i++) {
 
-	}
+			int animalIndexToMove = findAnimalIndexBySquare(move[i].getFrom());
+			myAnimals[animalIndexToMove].square = move[i].getTo();
 
-	public boolean isFree(String square) {
-		boolean free = true;
-		for (int i = 0; i < myAnimals.length; i++) {
-			if (myAnimals[i].square.equals(square)) {
-				free = false;
-				break;
+			int animalIndexToRemove = findAnimalIndexBySquare(move[i].getTo());
+			if (animalIndexToRemove > -1) {
+				myAnimals[animalIndexToRemove] = null;
 			}
 		}
-		return free;
+
+		Animal[] newArray = new Animal[32];
+		nrAnimals = 0;
+		for (int i = 0; i < myAnimals.length; i++) {
+			if (myAnimals[i] != null) {
+				newArray[nrAnimals] = myAnimals[i];
+				nrAnimals++;
+			}
+		}
+
+		myAnimals = Arrays.copyOfRange(newArray, 0, nrAnimals);
+	}
+
+	private int findAnimalIndexBySquare(String square) {
+
+		for (int j = 0; j < myAnimals.length; j++) {
+			if (myAnimals[j] != null && myAnimals[j].square.equals(square)) {
+				return j;
+			}
+		}
+
+		return -1;
 	}
 
 	public void possibleMoves() {
@@ -163,7 +185,7 @@ public class Position {
 
 	@Override
 	public String toString() {
-		String str = "   a b c d e f g h\n";
+		String str = "   a  b  c  d  e  f  g  h\n";
 		Animal[][] ani = boardRepresentation();
 		for (int i : I) {
 			str += (i + " ");
