@@ -3,7 +3,7 @@ public class Penguin extends Predator {
 	// Ein Pinguin kann 12 Tage bzw. Spielrunden ohne Essen auskommen.
 	// Die Deklaration darf entfernt (und der Wert z. B. direkt im Code
 	// verwendet) werden.
-	private static int withoutFood = 12;
+	//private static int withoutFood = 12;
 
 	/**
 	 * Dem Konstruktor wird das Geschlecht des Tiers uebergeben.
@@ -11,10 +11,14 @@ public class Penguin extends Predator {
 	 */
 	public Penguin(boolean female) {
 		super(female);
+		withoutFood = 12;
+		resetLife();
 	}
 
 	public Penguin(boolean female, String square, Position position) {
 		super(female, square, position);
+		withoutFood = 12;
+		resetLife();
 	}
 
 	@Override
@@ -25,43 +29,43 @@ public class Penguin extends Predator {
 
 		if (getVertPosition() < 7 && (board[getHorPosition()][getVertPosition() + 1] == null
 				|| canEat(board[getHorPosition()][getVertPosition() + 1]))) {
-			moves[m] = new Move(this.square, HOR[getHorPosition()] + VERT[getVertPosition() + 1]);
+			moves[m] = new Move(this.square, HOR[getHorPosition()] + VERT[getVertPosition() + 1], true);
 			m++;
 		}
 		if (getVertPosition() > 0 && (board[getHorPosition()][getVertPosition() - 1] == null
 				|| canEat(board[getHorPosition()][getVertPosition() - 1]))) {
-			moves[m] = new Move(this.square, HOR[getHorPosition()] + VERT[getVertPosition() - 1]);
+			moves[m] = new Move(this.square, HOR[getHorPosition()] + VERT[getVertPosition() - 1], true);
 			m++;
 		}
 		if (getHorPosition() < 7 && (board[getHorPosition() + 1][getVertPosition()] == null
 				|| canEat(board[getHorPosition() + 1][getVertPosition()]))) {
-			moves[m] = new Move(this.square, HOR[getHorPosition() + 1] + VERT[getVertPosition()]);
+			moves[m] = new Move(this.square, HOR[getHorPosition() + 1] + VERT[getVertPosition()], true);
 			m++;
 		}
 		if (getHorPosition() > 0 && (board[getHorPosition() - 1][getVertPosition()] == null
 				|| canEat(board[getHorPosition() - 1][getVertPosition()]))) {
-			moves[m] = new Move(this.square, HOR[getHorPosition() - 1] + VERT[getVertPosition()]);
+			moves[m] = new Move(this.square, HOR[getHorPosition() - 1] + VERT[getVertPosition()], true);
 			m++;
 		}
 
 		if (getVertPosition() < 7 && getHorPosition() < 7 && (board[getHorPosition() + 1][getVertPosition() + 1] == null
 				|| canEat(board[getHorPosition() + 1][getVertPosition() + 1]))) {
-			moves[m] = new Move(this.square, HOR[getHorPosition() + 1] + VERT[getVertPosition() + 1]);
+			moves[m] = new Move(this.square, HOR[getHorPosition() + 1] + VERT[getVertPosition() + 1], true);
 			m++;
 		}
 		if (getVertPosition() < 7 && getHorPosition() > 0 && (board[getHorPosition() - 1][getVertPosition() + 1] == null
 				|| canEat(board[getHorPosition() - 1][getVertPosition() + 1]))) {
-			moves[m] = new Move(this.square, HOR[getHorPosition() - 1] + VERT[getVertPosition() + 1]);
+			moves[m] = new Move(this.square, HOR[getHorPosition() - 1] + VERT[getVertPosition() + 1], true);
 			m++;
 		}
 		if (getVertPosition() > 0 && getHorPosition() > 0 && (board[getHorPosition() - 1][getVertPosition() - 1] == null
 				|| canEat(board[getHorPosition() - 1][getVertPosition() - 1]))) {
-			moves[m] = new Move(this.square, HOR[getHorPosition() - 1] + VERT[getVertPosition() - 1]);
+			moves[m] = new Move(this.square, HOR[getHorPosition() - 1] + VERT[getVertPosition() - 1], true);
 			m++;
 		}
 		if (getVertPosition() > 0 && getHorPosition() < 7 && (board[getHorPosition() + 1][getVertPosition() - 1] == null
 				|| canEat(board[getHorPosition() + 1][getVertPosition() - 1]))) {
-			moves[m] = new Move(this.square, HOR[getHorPosition() + 1] + VERT[getVertPosition() - 1]);
+			moves[m] = new Move(this.square, HOR[getHorPosition() + 1] + VERT[getVertPosition() - 1], true);
 			m++;
 		}
 

@@ -30,14 +30,17 @@ public class Position {
 	 */
 	private char next = 'W';
 
+	private char firstPlayer;
+
 	/**
 	 * Stellt die Anfangsposition des Spiels her. Der Parameter gibt an, welche
 	 * Seite beginnt ('M' oder 'W').
 	 */
 	public void reset(char movesNext) {
+		firstPlayer = movesNext;
 		next = movesNext;
-		myAnimals = new Animal[33];
-		nrAnimals = 33;
+		myAnimals = new Animal[32];
+		nrAnimals = 32;
 
 		myAnimals[0] = new Snake(true, "a1", this);
 		myAnimals[1] = new Elephant(true, "b1", this);
@@ -72,8 +75,6 @@ public class Position {
 		myAnimals[29] = new Rabbit(false, "f7", this);
 		myAnimals[30] = new Rabbit(false, "g7", this);
 		myAnimals[31] = new Penguin(false, "h7", this);
-
-		myAnimals[32] = new Leopard(false, "d4", this);
 	}
 
 	/**
@@ -92,26 +93,28 @@ public class Position {
 	 */
 	public void applyMoves(Move[] move) {
 		for (int i = 0; i < move.length; i++) {
+			if (move[i] != null) {
+				int animalIndexToMove = findAnimalIndexBySquare(move[i].getFrom());
+				int animalIndexToRemove = findAnimalIndexBySquare(move[i].getTo());
 
-			int animalIndexToMove = findAnimalIndexBySquare(move[i].getFrom());
-			myAnimals[animalIndexToMove].square = move[i].getTo();
+				myAnimals[animalIndexToMove].square = move[i].getTo();
 
-			int animalIndexToRemove = findAnimalIndexBySquare(move[i].getTo());
-			if (animalIndexToRemove > -1) {
-				myAnimals[animalIndexToRemove] = null;
+				if (animalIndexToRemove > -1) {
+					myAnimals[animalIndexToRemove] = null;
+					// Eat
+					myAnimals[animalIndexToMove].resetLife();
+				}
 			}
 		}
 
-		Animal[] newArray = new Animal[32];
-		nrAnimals = 0;
-		for (int i = 0; i < myAnimals.length; i++) {
-			if (myAnimals[i] != null) {
-				newArray[nrAnimals] = myAnimals[i];
-				nrAnimals++;
-			}
-		}
+		removeDeadAnimals();
 
-		myAnimals = Arrays.copyOfRange(newArray, 0, nrAnimals);
+		if (next == 'W')
+			next = 'M';
+		else
+			next = 'W';
+
+		checkEndOfTurn();
 	}
 
 	private int findAnimalIndexBySquare(String square) {
@@ -125,13 +128,56 @@ public class Position {
 		return -1;
 	}
 
-	public void possibleMoves() {
+	public Move[] possibleMoves() {
+		Move[] possibleMoves = new Move[100];
+		int nrMoves = 0;
+
 		for (int i = 0; i < myAnimals.length; i++) {
 			if ((next == 'W' && myAnimals[i].female) || (next == 'M' && !myAnimals[i].female)) {
 				Move[] moves = myAnimals[i].possibleMoves();
 				for (int j = 0; j < moves.length; j++) {
-					System.out.println(moves[j].toString());
+					possibleMoves[nrMoves] = moves[j];
+					nrMoves++;
 				}
+			}
+		}
+
+		return possibleMoves;
+	}
+
+	public void checkEndOfTurn() {
+		// End of turn
+		if (next == firstPlayer) {
+			for (int i = 0; i < myAnimals.length; i++) {
+				myAnimals[i].sunset();
+				if (!myAnimals[i].alive) {
+					myAnimals[i] = null;
+				}
+			}
+
+			removeDeadAnimals();
+		}
+	}
+
+	public void removeDeadAnimals() {
+		// Remove empty
+		Animal[] newArray = new Animal[32];
+		nrAnimals = 0;
+		for (int i = 0; i < myAnimals.length; i++) {
+			if (myAnimals[i] != null) {
+				newArray[nrAnimals] = myAnimals[i];
+				nrAnimals++;
+			}
+		}
+		myAnimals = Arrays.copyOfRange(newArray, 0, nrAnimals);
+	}
+
+	public void predatorsLifes() {
+		for (int i = 0; i < myAnimals.length; i++) {
+			// Traverse my predators
+			if (myAnimals[i].withoutFood > 0
+					&& ((next == 'W' && myAnimals[i].female) || (next == 'M' && !myAnimals[i].female))) {
+				System.out.println(myAnimals[i].square + " - " + myAnimals[i].daysToLive);
 			}
 		}
 	}
@@ -145,8 +191,37 @@ public class Position {
 	 *
 	 */
 	public char theWinner() {
-		// TODO
-		return 'W';
+		int mPredators = 0;
+		int mVegetarian = 0;
+		int wPredators = 0;
+		int wVegetarian = 0;
+
+		if (nrAnimals == 0)
+			return 'N';
+
+		for (int i = 0; i < myAnimals.length; i++) {
+			// Vegetarian
+			if (myAnimals[i].withoutFood == -100) {
+				if (myAnimals[i].female)
+					wVegetarian++;
+				else
+					mVegetarian++;
+			} else {
+				if (myAnimals[i].female)
+					wPredators++;
+				else
+					mPredators++;
+			}
+		}
+
+		if (mPredators == 0 && wPredators == 0) {
+			if (mVegetarian > wVegetarian)
+				return 'M';
+			else
+				return 'W';
+		}
+
+		return 'X';
 	}
 
 	// Ausgabe der Spielposition

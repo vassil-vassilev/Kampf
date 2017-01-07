@@ -10,7 +10,7 @@
 public class Main {
 
     public static void main(String args[]) {
-    	String start = IO.readString("M or W");
+    	String start = IO.readString("M or W: ");
     	Game game = new Game();
     	game.startGame(start.equals("W"));
     }

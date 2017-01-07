@@ -13,10 +13,12 @@ public class Move {
 
 	private String from;
 	private String to;
+	private boolean isPredator;
 
-	public Move(String from, String to) {
+	public Move(String from, String to, boolean isPredator) {
 		this.from = from;
 		this.to = to;
+		this.isPredator = isPredator;
 	}
 
 	public Move(String move) {
@@ -34,22 +36,7 @@ public class Move {
 	public boolean equals(Object other) {
 		return this.toString().equals(other);
 	}
-
-	public int getFromHor() {
-		return horToIndex(from.charAt(0));
-	}
-
-	public int getFromVert() {
-		return vertToIndex(from.charAt(1));
-	}
 	
-	public int getToHor() {
-		return horToIndex(to.charAt(0));
-	}
-
-	public int getToVert() {
-		return vertToIndex(to.charAt(1));
-	}
 	public String getFrom() {
 		return from;
 	}

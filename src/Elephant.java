@@ -19,7 +19,7 @@ public class Elephant extends Vegetarian {
     	int m = 0;
     	for(int i = getVertPosition() + 1; i < 8; i++) {
     		if(board[getHorPosition()][i] == null) {
-    			moves[m] = new Move(this.square, HOR[getHorPosition()] + VERT[i]);
+    			moves[m] = new Move(this.square, HOR[getHorPosition()] + VERT[i], false);
     			m++;
     		} else {
     			break;
@@ -27,7 +27,7 @@ public class Elephant extends Vegetarian {
     	}
     	for(int i = getVertPosition() - 1; i >= 0; i--) {
     		if(board[getHorPosition()][i] == null) {
-    			moves[m] = new Move(this.square, HOR[getHorPosition()] + VERT[i]);
+    			moves[m] = new Move(this.square, HOR[getHorPosition()] + VERT[i], false);
     			m++;
     		} else {
     			break;
@@ -35,7 +35,7 @@ public class Elephant extends Vegetarian {
     	}
     	for(int i = getHorPosition() + 1; i < 8; i++) {
     		if(board[i][getVertPosition()] == null) {
-    			moves[m] = new Move(this.square, HOR[i] + VERT[getVertPosition()]);
+    			moves[m] = new Move(this.square, HOR[i] + VERT[getVertPosition()], false);
     			m++;
     		} else {
     			break;
@@ -43,7 +43,7 @@ public class Elephant extends Vegetarian {
     	}
     	for(int i = getHorPosition() - 1; i >= 0; i--) {
     		if(board[i][getVertPosition()] == null) {
-    			moves[m] = new Move(this.square, HOR[i] + VERT[getVertPosition()]);
+    			moves[m] = new Move(this.square, HOR[i] + VERT[getVertPosition()], false);
     			m++;
     		} else {
     			break;

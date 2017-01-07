@@ -19,63 +19,63 @@ public class Horse extends Vegetarian {
 		int m = 0;
 
 		if (getVertPosition() < 7 && board[getHorPosition()][getVertPosition() + 1] == null) {
-			moves[m] = new Move(this.square, HOR[getHorPosition()] + VERT[getVertPosition() + 1]);
+			moves[m] = new Move(this.square, HOR[getHorPosition()] + VERT[getVertPosition() + 1], false);
 			m++;
 		}
 		if (getVertPosition() > 0 && board[getHorPosition()][getVertPosition() - 1] == null) {
-			moves[m] = new Move(this.square, HOR[getHorPosition()] + VERT[getVertPosition() - 1]);
+			moves[m] = new Move(this.square, HOR[getHorPosition()] + VERT[getVertPosition() - 1], false);
 			m++;
 		}
 		if (getHorPosition() < 7 && board[getHorPosition() + 1][getVertPosition()] == null) {
-			moves[m] = new Move(this.square, HOR[getHorPosition() + 1] + VERT[getVertPosition()]);
+			moves[m] = new Move(this.square, HOR[getHorPosition() + 1] + VERT[getVertPosition()], false);
 			m++;
 		}
 		if (getHorPosition() > 0 && board[getHorPosition() - 1][getVertPosition()] == null) {
-			moves[m] = new Move(this.square, HOR[getHorPosition() - 1] + VERT[getVertPosition()]);
+			moves[m] = new Move(this.square, HOR[getHorPosition() - 1] + VERT[getVertPosition()], false);
 			m++;
 		}
 
 		// 2 Felder
 		if (getVertPosition() < 6 && getHorPosition() < 6
 				&& board[getHorPosition() + 2][getVertPosition() + 2] == null) {
-			moves[m] = new Move(this.square, HOR[getHorPosition() + 2] + VERT[getVertPosition() + 2]);
+			moves[m] = new Move(this.square, HOR[getHorPosition() + 2] + VERT[getVertPosition() + 2], false);
 			m++;
 		}
 		if (getVertPosition() < 6 && getHorPosition() > 1
 				&& board[getHorPosition() - 2][getVertPosition() + 2] == null) {
-			moves[m] = new Move(this.square, HOR[getHorPosition() - 2] + VERT[getVertPosition() + 2]);
+			moves[m] = new Move(this.square, HOR[getHorPosition() - 2] + VERT[getVertPosition() + 2], false);
 			m++;
 		}
 		if (getVertPosition() > 1 && getHorPosition() > 1
 				&& board[getHorPosition() - 2][getVertPosition() - 2] == null) {
-			moves[m] = new Move(this.square, HOR[getHorPosition() - 2] + VERT[getVertPosition() - 2]);
+			moves[m] = new Move(this.square, HOR[getHorPosition() - 2] + VERT[getVertPosition() - 2], false);
 			m++;
 		}
 		if (getVertPosition() > 1 && getHorPosition() < 6
 				&& board[getHorPosition() + 2][getVertPosition() - 2] == null) {
-			moves[m] = new Move(this.square, HOR[getHorPosition() + 2] + VERT[getVertPosition() - 2]);
+			moves[m] = new Move(this.square, HOR[getHorPosition() + 2] + VERT[getVertPosition() - 2], false);
 			m++;
 		}
 
 		// 3 Felder
 		if (getVertPosition() < 5 && getHorPosition() < 5
 				&& board[getHorPosition() + 3][getVertPosition() + 3] == null) {
-			moves[m] = new Move(this.square, HOR[getHorPosition() + 3] + VERT[getVertPosition() + 3]);
+			moves[m] = new Move(this.square, HOR[getHorPosition() + 3] + VERT[getVertPosition() + 3], false);
 			m++;
 		}
 		if (getVertPosition() < 5 && getHorPosition() > 2
 				&& board[getHorPosition() - 3][getVertPosition() + 3] == null) {
-			moves[m] = new Move(this.square, HOR[getHorPosition() - 3] + VERT[getVertPosition() + 3]);
+			moves[m] = new Move(this.square, HOR[getHorPosition() - 3] + VERT[getVertPosition() + 3], false);
 			m++;
 		}
 		if (getVertPosition() > 2 && getHorPosition() > 2
 				&& board[getHorPosition() - 3][getVertPosition() - 3] == null) {
-			moves[m] = new Move(this.square, HOR[getHorPosition() - 3] + VERT[getVertPosition() - 3]);
+			moves[m] = new Move(this.square, HOR[getHorPosition() - 3] + VERT[getVertPosition() - 3], false);
 			m++;
 		}
 		if (getVertPosition() > 2 && getHorPosition() < 5
 				&& board[getHorPosition() + 3][getVertPosition() - 3] == null) {
-			moves[m] = new Move(this.square, HOR[getHorPosition() + 3] + VERT[getVertPosition() - 3]);
+			moves[m] = new Move(this.square, HOR[getHorPosition() + 3] + VERT[getVertPosition() - 3], false);
 			m++;
 		}
 		

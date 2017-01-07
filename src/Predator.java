@@ -23,6 +23,20 @@ public class Predator extends Animal {
 	}
 
 	public boolean canEat(Animal target) {
-		return Vegetarian.class.isAssignableFrom(target.getClass()) && (target.female != female);
+		// Check if vegetarian and the opposite player
+		return withoutFood == -100 && (target.female != female);
+	}
+
+	@Override
+	public void resetLife() {
+		daysToLive = withoutFood;
+	}
+
+	@Override
+	public void sunset() {
+		daysToLive--;
+		if (daysToLive == -1) {
+			alive = false;
+		}
 	}
 }

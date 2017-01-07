@@ -3,7 +3,7 @@ public class Snake extends Predator {
 	// Eine Schlange kann 9 Tage bzw. Spielrunden ohne Essen auskommen.
 	// Die Deklaration darf entfernt (und der Wert z. B. direkt im Code
 	// verwendet) werden.
-	private static int withoutFood = 9;
+	// private static int withoutFood = 9;
 
 	/**
 	 * Dem Konstruktor wird das Geschlecht des Tiers uebergeben.
@@ -11,10 +11,14 @@ public class Snake extends Predator {
 	 */
 	public Snake(boolean female) {
 		super(female);
+		withoutFood = 9;
+		resetLife();
 	}
 
 	public Snake(boolean female, String square, Position position) {
 		super(female, square, position);
+		withoutFood = 9;
+		resetLife();
 	}
 
 	@Override
@@ -27,11 +31,11 @@ public class Snake extends Predator {
 			int next = getHorPosition() - 1;
 			for (int j = getVertPosition() + 1; j < 8; j++) {
 				if (board[next][j] == null) {
-					moves[m] = new Move(this.square, HOR[next] + VERT[j]);
+					moves[m] = new Move(this.square, HOR[next] + VERT[j], true);
 					m++;
 				} else {
 					if (canEat(board[next][j])) {
-						moves[m] = new Move(this.square, HOR[next] + VERT[j]);
+						moves[m] = new Move(this.square, HOR[next] + VERT[j], true);
 						m++;
 					}
 					break;
@@ -48,11 +52,11 @@ public class Snake extends Predator {
 			int next = getHorPosition() + 1;
 			for (int j = getVertPosition() - 1; j >= 0; j--) {
 				if (board[next][j] == null) {
-					moves[m] = new Move(this.square, HOR[next] + VERT[j]);
+					moves[m] = new Move(this.square, HOR[next] + VERT[j], true);
 					m++;
 				} else {
 					if (canEat(board[next][j])) {
-						moves[m] = new Move(this.square, HOR[next] + VERT[j]);
+						moves[m] = new Move(this.square, HOR[next] + VERT[j], true);
 						m++;
 					}
 					break;
@@ -69,11 +73,11 @@ public class Snake extends Predator {
 			int next = getVertPosition() - 1;
 			for (int i = getHorPosition() - 1; i >= 0; i--) {
 				if (board[i][next] == null) {
-					moves[m] = new Move(this.square, HOR[i] + VERT[next]);
+					moves[m] = new Move(this.square, HOR[i] + VERT[next], true);
 					m++;
 				} else {
 					if (canEat(board[i][next])) {
-						moves[m] = new Move(this.square, HOR[i] + VERT[next]);
+						moves[m] = new Move(this.square, HOR[i] + VERT[next], true);
 						m++;
 					}
 					break;
@@ -90,11 +94,11 @@ public class Snake extends Predator {
 			int next = getVertPosition() + 1;
 			for (int i = getHorPosition() + 1; i < 8; i++) {
 				if (board[i][next] == null) {
-					moves[m] = new Move(this.square, HOR[i] + VERT[next]);
+					moves[m] = new Move(this.square, HOR[i] + VERT[next], true);
 					m++;
 				} else {
 					if (canEat(board[i][next])) {
-						moves[m] = new Move(this.square, HOR[i] + VERT[next]);
+						moves[m] = new Move(this.square, HOR[i] + VERT[next], true);
 						m++;
 					}
 					break;
