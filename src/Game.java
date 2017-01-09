@@ -29,12 +29,13 @@ public class Game {
 		while (pos.theWinner() == 'X') {
 			System.out.print(pos.toString());
 
-			Move[] validMoves = pos.possibleMoves();
 			Move[] movesTaken = new Move[4];
 			int nrMoves = 0;
+			int movedPredators = 0;
 			boolean valid = false;
 
 			while (!valid) {
+				Move[] validMoves = pos.possibleMoves();
 				String action = IO.readString(
 						"Choose an action:\nP - for pass, M - for possible moves, L - for the life of the predators or enter a valid move\n");
 				if (action.equals("P") || action.equals("M") || action.equals("L")) {
@@ -51,17 +52,39 @@ public class Game {
 					}
 
 				} else {
+					boolean hasMoved = false;
 					for (Move m : validMoves) {
 						// Valid move
 						if (m != null && m.toString().equals(action)) {
+							// Check types of moved animals
+							if (m.isPredator() && movedPredators == 1) {
+								// Can't move more predators
+								System.out.println("Can't move more than 1 predator.");
+								break;
+							} else if (!m.isPredator() && movedPredators == 0 && nrMoves == 3) {
+								// Player wants to move a vegetarian, but has
+								// already moved 3 of them
+								System.out.println("Can't move more than 3 vegetarians.");
+								break;
+							}
+
 							movesTaken[nrMoves] = m;
 							nrMoves++;
+							hasMoved = true;
+
+							if (m.isPredator())
+								movedPredators++;
+
 							// 4 moves taken so no more input is required
 							if (nrMoves == 4) {
 								valid = true;
 							}
 							break;
 						}
+					}
+
+					if (!valid && !hasMoved) {
+						System.out.println("Move is not valid!");
 					}
 				}
 			}

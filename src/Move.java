@@ -8,8 +8,13 @@
  */
 public class Move {
 
-    private static int vertToIndex(char c){return (c-'1');}
-    private static int horToIndex(char c){return (c-'a');}
+	private static int vertToIndex(char c) {
+		return (c - '1');
+	}
+
+	private static int horToIndex(char c) {
+		return (c - 'a');
+	}
 
 	private String from;
 	private String to;
@@ -36,18 +41,16 @@ public class Move {
 	public boolean equals(Object other) {
 		return this.toString().equals(other);
 	}
-	
+
 	public String getFrom() {
 		return from;
 	}
-	public void setFrom(String from) {
-		this.from = from;
-	}
+
 	public String getTo() {
 		return to;
 	}
-	public void setTo(String to) {
-		this.to = to;
+
+	public boolean isPredator() {
+		return isPredator;
 	}
-	
 }
