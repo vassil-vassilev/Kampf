@@ -217,8 +217,16 @@ public class Position {
 		if (mPredators == 0 && wPredators == 0) {
 			if (mVegetarian > wVegetarian)
 				return 'M';
-			else
+			else if (wVegetarian > mVegetarian)
 				return 'W';
+			else
+				return 'N';
+		} else if (mVegetarian + mPredators == 0 && wVegetarian + wPredators == 0) {
+			return 'N';
+		} else if (mVegetarian + mPredators == 0) {
+			return 'W';
+		} else if (wVegetarian + wPredators == 0) {
+			return 'M';
 		}
 
 		return 'X';

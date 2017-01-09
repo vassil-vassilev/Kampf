@@ -19,7 +19,7 @@ public class Animal {
 	public boolean alive = true; // Lebendig?
 	public String square; // Auf welchem Feld? (genau zwei Zeichen, z. B. "e4")
 	public Position position; // Auf welchem Spielbrett?
-	public int withoutFood = -1;
+	public int withoutFood = -100;
 	public int daysToLive;
 
 	public Animal() {

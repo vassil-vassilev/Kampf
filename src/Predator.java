@@ -24,7 +24,7 @@ public class Predator extends Animal {
 
 	public boolean canEat(Animal target) {
 		// Check if vegetarian and the opposite player
-		return withoutFood == -100 && (target.female != female);
+		return target.withoutFood == -100 && (target.female != female);
 	}
 
 	@Override
